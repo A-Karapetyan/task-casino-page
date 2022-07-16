@@ -34,10 +34,10 @@
         }
     
         .game-title {
-            color: $white;
+            color: $green;
             position: absolute;
             bottom: 0;
-            -webkit-text-stroke: 1px $gray;
+            -webkit-text-stroke: 1px $black;
             left: 50%;
             transform: translateX(-50%);
             white-space: nowrap;

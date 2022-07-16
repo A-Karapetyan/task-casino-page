@@ -27,7 +27,7 @@ export class HttpService {
 		return this.http.get(this.getFullUrl(url), { params, headers });
 	}
 
-  private getFullUrl(url: string) {
-    return environment.baseUrl + url;
-  }
+  	private getFullUrl(url: string) {
+    	return environment.baseUrl + url;
+  	}
 }
