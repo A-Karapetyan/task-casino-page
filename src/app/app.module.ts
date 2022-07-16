@@ -9,7 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HttpService } from './http/http.service';
 import { GameCardComponent } from './components/game-card/game-card.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { PricePipe } from './api/pipes/price.pipe';
+import { PricePipe } from './pipes/price.pipe';
 import { EmptyListComponent } from './components/empty-list/empty-list.component';
 
 @NgModule({
