@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs';
+import { finalize } from 'rxjs';
 import { GameService } from './api/game/game.service';
 import { JackpotService } from './api/jackpot/jackpot.service';
 import { CategoryItem } from './models/category-item.model';
@@ -27,12 +27,11 @@ export class AppComponent implements OnInit {
   gamesList: GameListModel[] = [];
   filteredGamesList: GameListModel[] = [];
   loading: boolean = true;
-  
+
   constructor(private gameService: GameService, private jackpotService: JackpotService) { }
 
   ngOnInit(): void {
     this.getGamesList();
-    this.getJackpotsList()
     setInterval(() => this.getJackpotsList(), 2000);
   }
 
@@ -51,12 +50,12 @@ export class AppComponent implements OnInit {
 
   categoryChanged(category: CategoryItem): void {
     this.selectedCategory = category;
-    console.log(this.selectedCategory)
     this.filterGames();
   }
 
   private getGamesList(): void {
     this.gameService.getGamesList()
+    .pipe(finalize(() => this.jackpotService.getJackpots()))
     .subscribe((res) => {
       this.gamesList = res;
       this.filterGames();
