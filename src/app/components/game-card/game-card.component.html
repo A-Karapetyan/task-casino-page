@@ -1,0 +1,11 @@
+<div class="card-wrapper">
+    <div class="card">
+        <img [src]="game?.image" alt="No image available">
+        <div *ngIf="game && game.jackpot" class="jackpot-container"></div>
+        <span *ngIf="game && game.jackpot" class="jackpot-amount">{{game.jackpot | price}}</span>
+        <h3 class="game-title" [title]="game?.name">{{game?.name}}</h3>
+        <button class="play-button" [title]="game?.name">Play</button>
+    </div>
+    <span class="new-label" *ngIf="game?.categories?.includes('new') && !selectedCategory?.categories?.includes('new')">new</span>
+    <span class="top-label" *ngIf="game?.categories?.includes('top') && !selectedCategory?.categories?.includes('top')">top</span>
+</div>

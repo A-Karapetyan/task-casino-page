@@ -1,0 +1,107 @@
+@import '../../scss/colors';
+
+.card-wrapper {
+    position: relative;
+
+    .card {
+        border: transparent 2px solid;
+        border-radius: 12px;
+        height: 153px;
+        width: 250px;
+        position: relative;
+        overflow: hidden;
+    
+        .jackpot-container {
+            height: 34px;
+            width: 100%;
+            background-color: $gray;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .jackpot-amount {
+            top: 17px;
+            left: 50%;
+            font-weight: bold;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            z-index: 999;
+            color: $white;
+        }
+    
+        .game-title {
+            color: $white;
+            position: absolute;
+            bottom: 0;
+            -webkit-text-stroke: 1px $gray;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 230px;
+        }
+    
+        .play-button {
+            height: 60px;
+            color: $white;
+            width: 100px;
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 20px;
+            background-color: $green;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+    
+            &:hover {
+                border: $gray 2px solid;
+            }
+        }
+    
+        &:hover {
+            border-color: $green;
+    
+            .play-button, .game-title {
+                display: block;
+                animation: button-showing .7s;
+                opacity: 1;
+            }
+        }
+    }
+    .new-label, .top-label {
+        width: 100px;
+        height: 20px;
+        background-color: $green;
+        color: $neutral-white;
+        position: absolute;
+        top: 20px;
+        right: -20px;
+        transform: rotate(45deg);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        border-radius: 5px;
+    }
+
+    .top-label {
+        background-color: $red;
+    }
+}
+
+@keyframes button-showing {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

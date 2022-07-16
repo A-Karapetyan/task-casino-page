@@ -1,2 +1,5 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<app-header [categoriesList]="categoriesList" [selectedCategory]="selectedCategory" (categoryChanged)="categoryChanged($event)"></app-header>
+
+<div class="content-warapper">
+    <app-home [loading]="loading" [filteredGamesList]="filteredGamesList" [selectedCategory]="selectedCategory"></app-home>
+</div>

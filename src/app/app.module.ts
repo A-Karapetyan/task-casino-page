@@ -6,19 +6,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { HttpService } from './http/http.service';
+import { GameCardComponent } from './components/game-card/game-card.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { PricePipe } from './api/pipes/price.pipe';
+import { EmptyListComponent } from './components/empty-list/empty-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    GameCardComponent,
+    LoadingComponent,
+    PricePipe,
+    EmptyListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

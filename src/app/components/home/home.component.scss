@@ -1,0 +1,14 @@
+.games-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 15px;
+    column-gap: 5px;
+    margin-top: 40px;
+
+    .loader {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}

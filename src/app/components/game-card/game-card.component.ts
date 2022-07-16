@@ -3,14 +3,13 @@ import { CategoryItem } from 'src/app/models/category-item.model';
 import { GameListModel } from 'src/app/models/game-list.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-game-card',
+  templateUrl: './game-card.component.html',
+  styleUrls: ['./game-card.component.scss']
 })
-export class HomeComponent implements OnInit {
-  @Input() filteredGamesList: GameListModel[] = [];
+export class GameCardComponent implements OnInit {
+  @Input() game!: GameListModel;
   @Input() selectedCategory!: CategoryItem;
-  @Input() loading: boolean = true;
 
   constructor() { }
 

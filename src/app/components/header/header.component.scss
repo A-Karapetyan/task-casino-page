@@ -1,12 +1,32 @@
-@import '../scss/colors.scss';
+@import '../../scss/colors';
 
 .header-wrapper {
     padding-top: 65px;
     background-color: $black;
 
     .categories-container {
+        display: flex;
+        justify-content: space-between;
         height: 55px;
         background-color: $gray;
         overflow-x: auto;
+        padding: 0 20px;
+
+        .category-block {
+            cursor: pointer;
+            padding: 10px 20px;
+            color: $white;
+            font-size: 24px;
+            white-space: nowrap;
+            background-color: transparent;
+
+            &:hover {
+                background-color: $green;
+            }
+        }
+
+        .selected {
+            background-color: $green;
+        }
     }
 }
