@@ -1,5 +1,0 @@
-<div class="games-container">
-    <app-game-card *ngFor="let game of filteredGamesList" [selectedCategory]="selectedCategory" [game]="game" ></app-game-card>
-    <app-empty-list *ngIf="!filteredGamesList.length && !loading"></app-empty-list>
-    <app-loading *ngIf="loading" class="loader"></app-loading>
-</div>

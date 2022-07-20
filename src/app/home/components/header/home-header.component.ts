@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CategoryItem } from 'src/app/models/category-item.model';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: 'app-home-header',
+  templateUrl: './home-header.component.html',
+  styleUrls: ['./home-header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HomeHeaderComponent implements OnInit {
   @Output() categoryChanged: EventEmitter<CategoryItem> = new EventEmitter();
 
   @Input() categoriesList: Array<CategoryItem> = [];

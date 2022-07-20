@@ -1,0 +1,7 @@
+<div class="games-container">
+    <ng-container *ngFor="let game of filteredGamesList">
+        <app-game-card [selectedCategory]="selectedCategory" [game]="game" [jackpot]="getJackpot(game)"></app-game-card>
+    </ng-container>
+    <app-empty-list *ngIf="!filteredGamesList.length && !loading"></app-empty-list>
+    <app-loading *ngIf="loading" class="loader"></app-loading>
+</div>
