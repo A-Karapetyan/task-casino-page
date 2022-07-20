@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { JackpotService } from 'src/app/api/jackpot/jackpot.service';
 import { CategoryItem } from 'src/app/models/category-item.model';
 import { GameListModel } from 'src/app/models/game-list.model';
 import { JackpotListModel } from 'src/app/models/jackpot-list.model';
@@ -11,14 +13,24 @@ import { JackpotListModel } from 'src/app/models/jackpot-list.model';
 export class GameCardComponent implements OnInit {
   @Input() game!: GameListModel;
   @Input() selectedCategory!: CategoryItem;
-  @Input() jackpot: JackpotListModel;
 
   get hasJackpot() {
-    return this.game && this.jackpot;
+    return !!this.game?.jackpot;
   }
 
-  constructor() { }
+  constructor(private jackpotService: JackpotService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.subToJackpotsListChange();
+  }
+
+  private subToJackpotsListChange() {
+    this.jackpotService.jackpotsList$
+      .pipe(
+        map((jackpots: JackpotListModel[]) => jackpots?.find(jb => jb.game === this.game?.id))
+      ).subscribe(jb => {
+        this.game.jackpot = jb?.amount || 0;
+        this.cdr.detectChanges();
+      });
   }
 }

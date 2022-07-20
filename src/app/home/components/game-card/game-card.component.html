@@ -2,7 +2,7 @@
     <div class="card">
         <img [src]="game?.image" alt="No image available">
         <div *ngIf="hasJackpot" class="jackpot-container"></div>
-        <span *ngIf="hasJackpot" class="jackpot-amount">{{ jackpot.amount  | currency : '£'}}</span>
+        <span *ngIf="hasJackpot" class="jackpot-amount">{{ game.jackpot | currency : '£'}}</span>
         <h3 class="game-title" [title]="game?.name">{{game?.name}}</h3>
         <button class="play-button" [title]="game?.name">Play</button>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { GameService } from 'src/app/api/game/game.service';
@@ -12,6 +12,7 @@ import { JackpotListModel } from 'src/app/models/jackpot-list.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   providers: [GameService, JackpotService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
   categoriesList: Array<CategoryItem> = [
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
   loading: boolean = true;
 
   constructor(private gameService: GameService, private jackpotService: JackpotService, private router: Router, 
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.handleQueryParams();
@@ -51,11 +52,8 @@ export class HomeComponent implements OnInit {
   private getGamesList(): void {
     this.gameService.getGamesList()
     .subscribe((res) => {
-      this.jackpotsList$ = this.jackpotService.jackpotsList$;
       this.subToJackpotListChanges();
-      res.forEach(item => {
-        this.gamesList.push(new GameListModel(item));
-      });
+      this.gamesList = res;
       this.filterGames();
       this.loading = false;
     });
@@ -66,7 +64,10 @@ export class HomeComponent implements OnInit {
   }
 
   private subToJackpotListChanges() {
-    this.jackpotsList$.subscribe(jackpots => this.jackpotsList = jackpots);
+    this.jackpotService.jackpotsList$.subscribe(jackpots => {
+      this.jackpotsList = jackpots;
+      this.cdr.detectChanges();
+    });
   }
 
   private handleQueryParams() {

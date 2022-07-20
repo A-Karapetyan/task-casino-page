@@ -1,5 +1,5 @@
 <app-home-header [categoriesList]="categoriesList" [selectedCategory]="selectedCategory" (categoryChanged)="categoryChanged($event)"></app-home-header>
 
 <div class="content-warapper">
-    <app-games-list [loading]="loading" [filteredGamesList]="filteredGamesList" [selectedCategory]="selectedCategory" [jackpotsList]="jackpotsList$ | async"></app-games-list>
+    <app-games-list [loading]="loading" [filteredGamesList]="filteredGamesList" [selectedCategory]="selectedCategory"></app-games-list>
 </div>
