@@ -14,8 +14,7 @@
         .jackpot-container {
             height: 34px;
             width: 100%;
-            background-color: $gray;
-            opacity: 0.5;
+            background-color: rgba($gray, 0.5);
             position: absolute;
             top: 0;
             display: flex;
