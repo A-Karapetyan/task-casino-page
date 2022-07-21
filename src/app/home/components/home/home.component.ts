@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { GameService } from 'src/app/api/game/game.service';
 import { JackpotService } from 'src/app/api/jackpot/jackpot.service';
 import { CategoryItem } from 'src/app/models/category-item.model';
@@ -14,7 +14,7 @@ import { JackpotListModel } from 'src/app/models/jackpot-list.model';
   providers: [GameService, JackpotService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   categoriesList: Array<CategoryItem> = [
     {name: 'Top Games', categoryFilterCb: (item: GameListModel) => item.categories?.includes('top'), categories: ['top']},
     {name: 'New Games', categoryFilterCb: (item: GameListModel) => item.categories?.includes('new'), categories: ['new']},
@@ -34,8 +34,16 @@ export class HomeComponent implements OnInit {
   jackpotsList: JackpotListModel[];
   loading: boolean = true;
 
+  private subscription: Subscription;
+
   constructor(private gameService: GameService, private jackpotService: JackpotService, private router: Router, 
     private activatedRoute: ActivatedRoute, private cdr: ChangeDetectorRef) { }
+    
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
     this.handleQueryParams();
@@ -64,7 +72,7 @@ export class HomeComponent implements OnInit {
   }
 
   private subToJackpotListChanges() {
-    this.jackpotService.jackpotsList$.subscribe(jackpots => {
+    this.subscription = this.jackpotService.jackpotsList$.subscribe(jackpots => {
       this.jackpotsList = jackpots;
       this.cdr.detectChanges();
     });
